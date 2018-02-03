@@ -1,4 +1,4 @@
-package com.travelinho_app;
+package com.travelinho.app;
 
 import android.app.Application;
 
