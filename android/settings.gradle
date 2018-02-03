@@ -1,0 +1,3 @@
+rootProject.name = 'travelinho_app'
+
+include ':app'
