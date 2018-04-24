@@ -13,6 +13,7 @@ class MainAppContainer extends Component {
         <WebView
           ref="webview"
           style={styles.webview}
+          javaScriptEnabledAndroid={true}
           source={{ uri: 'https://www.travelinho.com' }}
           onNavigationStateChange={(event) => {
             console.log(event)
