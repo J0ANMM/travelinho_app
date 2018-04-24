@@ -1,9 +1,32 @@
 import React, { Component } from 'react';
-import { WebView, StyleSheet, Linking, View, StatusBar, Platform } from 'react-native';
+import { WebView, StyleSheet, Linking, View, StatusBar, Platform, BackHandler } from 'react-native';
 
 const domain = 'travelinho.com'
 
 class MainAppContainer extends Component {
+  constructor() {
+    super();
+    this.state = {
+      canGoBack: false
+    }
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.backHandler);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.backHandler);
+  }
+
+  backHandler = () => {
+    if(this.state.canGoBack){
+      this.refs.webview.goBack();
+      return true;
+    }
+    return false;
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -13,10 +36,10 @@ class MainAppContainer extends Component {
         <WebView
           ref="webview"
           style={styles.webview}
-          javaScriptEnabledAndroid={true}
+          scalesPageToFit={Platform.OS === 'ios'}
           source={{ uri: 'https://www.travelinho.com' }}
           onNavigationStateChange={(event) => {
-            console.log(event)
+            this.setState({ canGoBack: event.canGoBack });
             if (!event.url.includes(domain) || event.url.includes('redirect')) {
               this.refs.webview.stopLoading();
               Linking.canOpenURL(event.url).then(supported => {

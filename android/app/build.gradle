@@ -101,7 +101,7 @@ android {
         applicationId "com.travelinho.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 3
+        versionCode 5
         versionName "0.1"
         manifestPlaceholders = [travelinhoApplicationLabel: "@string/app_name"]
         ndk {
