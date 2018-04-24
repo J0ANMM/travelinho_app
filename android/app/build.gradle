@@ -101,8 +101,9 @@ android {
         applicationId "com.travelinho.app"
         minSdkVersion 16
         targetSdkVersion 22
-        versionCode 2
+        versionCode 3
         versionName "0.1"
+        manifestPlaceholders = [travelinhoApplicationLabel: "@string/app_name"]
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -115,6 +116,21 @@ android {
                 keyAlias MYAPP_RELEASE_KEY_ALIAS
                 keyPassword MYAPP_RELEASE_KEY_PASSWORD
             }
+        }
+    }
+    productFlavors {
+        alpha {
+            applicationIdSuffix '.alpha'
+            versionNameSuffix '-ALPHA'
+            manifestPlaceholders = [travelinhoApplicationLabel: "TravelinhoAlpha"]
+        }
+        beta {
+            applicationIdSuffix '.beta'
+            versionNameSuffix '-BETA'
+            manifestPlaceholders = [travelinhoApplicationLabel: "TravelinhoBeta"]
+        }
+        production {
+            versionNameSuffix '-PRODUCTION'
         }
     }
     splits {

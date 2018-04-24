@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.travelinho.app"
+    xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -13,12 +14,13 @@
     <application
       android:name=".MainApplication"
       android:allowBackup="true"
-      android:label="@string/app_name"
+      android:label="${travelinhoApplicationLabel}"
       android:icon="@mipmap/ic_launcher"
-      android:theme="@style/AppTheme">
+      android:theme="@style/AppTheme"
+      tools:replace="android:label">
       <activity
         android:name=".MainActivity"
-        android:label="@string/app_name"
+        android:label="${travelinhoApplicationLabel}"
         android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
         android:windowSoftInputMode="adjustResize">
         <intent-filter>
