@@ -13,12 +13,19 @@ class MainAppContainer extends Component {
         <WebView
           ref="webview"
           style={styles.webview}
-          source={{ uri: 'http://www.travelinho.com' }}
+          source={{ uri: 'https://www.travelinho.com' }}
           onNavigationStateChange={(event) => {
             console.log(event)
-            if (!event.url.includes(domain)) {
+            if (!event.url.includes(domain) || event.url.includes('redirect')) {
               this.refs.webview.stopLoading();
-              Linking.openURL(event.url);
+              Linking.canOpenURL(event.url).then(supported => {
+                if (supported) {
+                  Linking.openURL(event.url)
+                    .catch(() => null);
+                } else {
+                  console.log("Don't know how to open URI: " + event.url);
+                }
+              });
             }
           }}
         />
